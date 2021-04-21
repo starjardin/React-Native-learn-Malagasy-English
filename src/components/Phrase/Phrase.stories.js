@@ -2,7 +2,7 @@ import { action } from '@storybook/addon-actions';
 import { text } from '@storybook/addon-knobs';
 import React from 'react';
 import { Text, View } from 'react-native';
-import Button from './Buttons';
+import Button from './Phrase';
 
 // storiesOf('Button', module)
 //   .addDecorator((getStory) => <CenterView>{getStory()}</CenterView>)

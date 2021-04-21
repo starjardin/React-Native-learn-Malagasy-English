@@ -8,3 +8,4 @@ export default function Button({text}) {
   return <TouchableHighlight >{ text }</TouchableHighlight>
 }
 
+

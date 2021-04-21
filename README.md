@@ -32,3 +32,20 @@ yarn ios
 # use storybook
 
 Enter dev menu on phone crtl + m (for android) select toggle storybook
+
+
+# problems
+
+if you get 
+
+```bash
+Error: spawn ./gradlew EACCES
+ ```
+
+while running `yarn android`
+
+try
+
+```
+chmod 755 android/gradlew 
+```

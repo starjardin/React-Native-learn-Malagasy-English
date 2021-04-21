@@ -1,12 +1,27 @@
 // components/Task.js
 import * as React from 'react';
-import { TextInput, SafeAreaView } from 'react-native';
+import { Text, SafeAreaView } from 'react-native';
 // import { styles } from '../constants/globalStyles';
 
 export default function Example({label}) {
+
+  console.log(label);
   return (
     <SafeAreaView >
-      <TextInput value={label} editable={false} />
+      <Text>{label}</Text>
+      <Text>{label}</Text>
+      <Text>{label}</Text>
+      <Text>{label}</Text>
+      <Text>{label}</Text>
+      <Text>{label}</Text>
+      <Text>{label}</Text>
+      <Text>{label}</Text>
+      <Text>{label}</Text>
+      <Text>{label}</Text>
+      <Text>{label}</Text>
+      <Text>{label}</Text>
+      <Text>{label}</Text>
+      <Text>{label}</Text>
     </SafeAreaView>
   );
 }

@@ -5,11 +5,12 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "start": "react-native start",
+    "start": "yarn run prestorybook && react-native start",
     "test": "jest",
     "lint": "eslint .",
     "storybook": "start-storybook -p 7007",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "prestorybook": "rnstl"
   },
   "dependencies": {
     "react": "17.0.1",
@@ -33,9 +34,17 @@
     "jest": "^26.6.3",
     "metro-react-native-babel-preset": "^0.64.0",
     "react-dom": "17.0.1",
+    "react-native-storybook-loader": "^2.0.2",
     "react-test-renderer": "17.0.1"
   },
   "jest": {
     "preset": "react-native"
+  },
+  "config": {
+    "react-native-storybook-loader": {
+      "searchDir": ["./src", "./storybook/stories","./packages"],
+      "pattern": "**/*.stories.js",
+      "outputFile": "./storybook/storyLoader.js"
+    }
   }
 }

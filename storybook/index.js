@@ -24,14 +24,27 @@
 
 // export default StorybookUIRoot;
 import { getStorybookUI, configure } from '@storybook/react-native';
+import { loadStories } from './storyLoader';
 
 import './rn-addons';
-
 // import stories
 configure(() => {
-  require('./stories');
+  // require('./stories');
+  loadStories()
 }, module);
 
 const StorybookUIRoot = getStorybookUI({});
 
 export default StorybookUIRoot;
+
+
+
+// import { configure } from '@kadira/storybook';
+
+// const req = require.context('./', true, /Story\.js$/)
+
+// function loadStories() {
+//   req.keys().forEach(req)
+// }
+
+// configure(loadStories, module);

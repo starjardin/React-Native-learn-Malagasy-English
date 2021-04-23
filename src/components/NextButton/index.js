@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {TouchableHighlight, StyleSheet, Text} from 'react-native';
 
 const styles = StyleSheet.create({
-  nextButton: {
+  nextButtonStyles: {
     backgroundColor: '#06B6D4',
     borderRadius: 30,
     fontStyle: 'normal',
@@ -16,14 +16,17 @@ const styles = StyleSheet.create({
     paddingRight: 31,
     paddingLeft: 27,
     justifyContent: 'center',
+    alignItems: 'center',
     alignSelf: 'center',
+    minHeight: 40,
+    minWidth: 90,
   },
 
-  textStyle: {
+  textColor: {
     color: '#FFFFFF',
   },
 
-  disabledButton: {
+  disabledButtonStyles: {
     backgroundColor: '#F9F9F9',
     borderStyle: 'solid',
     borderColor: '#06B6D4',
@@ -31,7 +34,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
   },
 
-  textStyleDisabledButtoon: {
+  textColorDisabledButtoon: {
     color: '#06B6D4',
   },
 });
@@ -39,10 +42,10 @@ const styles = StyleSheet.create({
 export default function Button({onPress, buttonText, disabled, ...restProps}) {
   return (
     <TouchableHighlight
-      style={[styles.nextButton, disabled && styles.disabledButton]}
+      style={[styles.nextButtonStyles, disabled && styles.disabledButtonStyles]}
       onPress={onPress}>
       <Text
-        style={[styles.textStyle, disabled && styles.textStyleDisabledButtoon]}>
+        style={[styles.textColor, disabled && styles.textColorDisabledButtoon]}>
         {buttonText}
       </Text>
     </TouchableHighlight>
@@ -51,10 +54,12 @@ export default function Button({onPress, buttonText, disabled, ...restProps}) {
 
 Button.defaultProps = {
   buttonText: null,
+  disabled: false,
   onPress: () => {},
 };
 
 Button.propTypes = {
   buttonText: PropTypes.node,
   onPress: PropTypes.func,
+  disabled: PropTypes.bool,
 };

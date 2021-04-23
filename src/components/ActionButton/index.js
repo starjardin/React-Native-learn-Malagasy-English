@@ -1,40 +1,47 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, Text, Image, SafeAreaView} from 'react-native';
+import {StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
 
 const styles = StyleSheet.create({
-  actionButtonStyles: {
-    color: '#FF0000',
+  actionButtonStyles: {},
+  icons: {
+    width: 20,
+    height: 20,
   },
 });
 
 export default function Button({
   onPress,
   buttonText,
-  disabled,
   ImageSource,
   textColor,
   ...restProps
 }) {
   return (
-    <SafeAreaView
+    <TouchableOpacity
       style={[styles.actionButtonStyles]}
       onPress={onPress}
       porps={restProps}>
       <Text style={{color: textColor}}>{buttonText}</Text>
       <Image source={ImageSource} />
-    </SafeAreaView>
+      <Image
+        source={require('../../icons//error.svg')}
+        resizeMode="contain"
+        style={styles.icons}
+      />
+    </TouchableOpacity>
   );
 }
 
 Button.defaultProps = {
   buttonText: null,
-  disabled: false,
+  ImageSource: null,
   onPress: () => {},
 };
 
 Button.propTypes = {
   buttonText: PropTypes.node,
   onPress: PropTypes.func,
-  disabled: PropTypes.bool,
+  //   ImageSource: PropTypes.string,
+  //   textColor: PropTypes.color,
 };

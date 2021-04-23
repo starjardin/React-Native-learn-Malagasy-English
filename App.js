@@ -26,6 +26,8 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import Button from './src/components/ActionButton';
+
 const Section = ({children, title}): Node => {
   const isDarkMode = useColorScheme() === 'dark';
   return (
@@ -66,6 +68,11 @@ const App: () => Node = () => {
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
         <Header />
+        <Button
+          buttonText="I am an action button"
+          textColor="#FF0000"
+          ImageSource={require('./src/icons/error.svg')}
+        />
         <View
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,

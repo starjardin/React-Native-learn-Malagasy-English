@@ -18,6 +18,8 @@ import {
   View,
 } from 'react-native';
 
+import Phrase from './src/components/PhraseTextarea';
+
 import {
   Colors,
   DebugInstructions,
@@ -66,6 +68,7 @@ const App: () => Node = () => {
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
         <Header />
+        <Phrase />
         <View
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,

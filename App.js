@@ -18,9 +18,6 @@ import {
   View,
 } from 'react-native';
 
-import Phrase from './src/components/PhraseTextarea';
-import Button from './src/components/NextButton';
-
 import {
   Colors,
   DebugInstructions,
@@ -69,8 +66,6 @@ const App: () => Node = () => {
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
         <Header />
-        <Phrase />
-        <Button buttonText="Next" onPress={alert('You clicked')} disabled />
         <View
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,

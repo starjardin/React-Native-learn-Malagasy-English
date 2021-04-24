@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {SafeAreaView, StyleSheet, View, Text} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import Button from '../ActionButton';
 import ArrowRight from '../../icons/arrow-right.svg';
 
@@ -32,17 +32,17 @@ const styles = StyleSheet.create({
 
 // I choose to render the text and the color from the props, just in case of change in the future
 
-export default function ListItem({name}) {
+export default function ListItem({name, onRowPress}) {
   return (
     <SafeAreaView style={styles.containerStyles}>
-      <View style={styles.listItemStyles}>
+      <TouchableOpacity style={styles.listItemStyles} onPress={onRowPress}>
         <Text numberOfLines={1} ellipsizeMode="tail" style={styles.textStyles}>
           {name}
         </Text>
         <Button buttonText={'Learn'} textColor="#06B6D4">
           <ArrowRight />
         </Button>
-      </View>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 }

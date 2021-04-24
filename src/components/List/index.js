@@ -8,7 +8,7 @@ export default function List({navigation, lang, data, onRowPress}) {
   return (
     <SafeAreaView>
       <FlatList
-        data={categories}
+        data={data}
         renderItem={({item, index}) => (
           <ListItem name={item.name.en} onRowPress={onRowPress} />
         )}

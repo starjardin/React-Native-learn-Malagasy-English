@@ -3,6 +3,7 @@ import React from 'react';
 import {View, StyleSheet, Text} from 'react-native';
 import ListItem from './';
 import Button from '../ActionButton';
+import ArrowRight from '../../icons/arrow-right.svg';
 
 const styels = StyleSheet.create({
   containerStyles: {
@@ -34,51 +35,39 @@ storiesOf('ListItem', module)
         <Text numberOfLines={1} ellipsizeMode="tail" style={styels.textStyles}>
           An unncessessarly loooooooooooooooong cat
         </Text>
-        <Button
-          buttonText={'Learn'}
-          ImageSource={require('../../icons/arrow.png')}
-          textColor="#06B6D4"
-        />
+        <Button buttonText={'Learn'} textColor="#06B6D4">
+          <ArrowRight />
+        </Button>
       </ListItem>
       <ListItem>
         <Text style={styels.textStyles}>All</Text>
-        <Button
-          buttonText={'Learn'}
-          ImageSource={require('../../icons/arrow.png')}
-          textColor="#06B6D4"
-        />
+        <Button buttonText={'Learn'} textColor="#06B6D4">
+          <ArrowRight />
+        </Button>
       </ListItem>
       <ListItem>
         <Text style={styels.textStyles}>All</Text>
-        <Button
-          buttonText={'Learn'}
-          ImageSource={require('../../icons/arrow.png')}
-          textColor="#06B6D4"
-        />
+        <Button buttonText={'Learn'} textColor="#06B6D4">
+          <ArrowRight />
+        </Button>
       </ListItem>
       <ListItem>
         <Text style={styels.textStyles}>All</Text>
-        <Button
-          buttonText={'Learn'}
-          ImageSource={require('../../icons/arrow.png')}
-          textColor="#06B6D4"
-        />
+        <Button buttonText={'Learn'} textColor="#06B6D4">
+          <ArrowRight />
+        </Button>
       </ListItem>
       <ListItem>
         <Text style={styels.textStyles}>All</Text>
-        <Button
-          buttonText={'Learn'}
-          ImageSource={require('../../icons/arrow.png')}
-          textColor="#06B6D4"
-        />
+        <Button buttonText={'Learn'} textColor="#06B6D4">
+          <ArrowRight />
+        </Button>
       </ListItem>
       <ListItem>
         <Text style={styels.textStyles}>All</Text>
-        <Button
-          buttonText={'Learn'}
-          ImageSource={require('../../icons/arrow.png')}
-          textColor="#06B6D4"
-        />
+        <Button buttonText={'Learn'} textColor="#06B6D4">
+          <ArrowRight />
+        </Button>
       </ListItem>
     </View>
   ));

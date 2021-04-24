@@ -7,6 +7,7 @@ function loadStories() {
   require('../src/components/ActionButton/ActionButton.stories');
   require('../src/components/NextButton/Button.stories');
   require('../src/components/PhraseTextarea/Phrase.stories');
+  require('../src/components/SectionHeading/SectionHeading.stories');
   require('../src/components/ToolButton/ToolButton.stories');
   require('./stories/Button/Button.stories');
   require('./stories/Welcome/Welcome.stories');
@@ -16,6 +17,7 @@ const stories = [
   '../src/components/ActionButton/ActionButton.stories',
   '../src/components/NextButton/Button.stories',
   '../src/components/PhraseTextarea/Phrase.stories',
+  '../src/components/SectionHeading/SectionHeading.stories',
   '../src/components/ToolButton/ToolButton.stories',
   './stories/Button/Button.stories',
   './stories/Welcome/Welcome.stories',

@@ -22,14 +22,17 @@ const styles = StyleSheet.create({
 });
 
 export default function Button({
-  onPress,
+  onPressButton,
   buttonText,
   textColor,
   children,
   ...restProps
 }) {
   return (
-    <TouchableOpacity style={styles.actionButtonStyles} activeOpacity={0.5}>
+    <TouchableOpacity
+      style={styles.actionButtonStyles}
+      activeOpacity={0.5}
+      onPress={onPressButton}>
       <Text style={[styles.TextStyle, {color: textColor}]}> {buttonText} </Text>
       {children}
     </TouchableOpacity>

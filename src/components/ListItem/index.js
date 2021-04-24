@@ -39,7 +39,10 @@ export default function ListItem({name, onRowPress}) {
         <Text numberOfLines={1} ellipsizeMode="tail" style={styles.textStyles}>
           {name}
         </Text>
-        <Button buttonText={'Learn'} textColor="#06B6D4">
+        <Button
+          buttonText={'Learn'}
+          textColor="#06B6D4"
+          onPressButton={onRowPress}>
           <ArrowRight />
         </Button>
       </TouchableOpacity>

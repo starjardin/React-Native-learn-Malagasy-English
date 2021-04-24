@@ -37,6 +37,11 @@ const styles = StyleSheet.create({
 export default function ({navigation}) {
   const {state} = useContext(LanguageContext);
   const {categories} = state;
+
+  function navigateToLearningScreen() {
+    navigation.navigate('LearningScreen');
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.buttonContainer}>
@@ -59,9 +64,8 @@ export default function ({navigation}) {
       <View style={styles.list}>
         <List
           data={categories}
-          onRowPress={() => {
-            navigation.navigate('LearningScreen');
-          }}
+          onRowPress={navigateToLearningScreen}
+          onPressButton={() => alert('Hello button')}
         />
       </View>
       <View style={{marginTop: 23}}>

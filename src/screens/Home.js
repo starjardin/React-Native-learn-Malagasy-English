@@ -38,10 +38,6 @@ export default function ({navigation}) {
   const {state} = useContext(LanguageContext);
   const {categories} = state;
 
-  function navigateToLearningScreen() {
-    navigation.navigate('LearningScreen');
-  }
-
   return (
     <View style={styles.container}>
       <View style={styles.buttonContainer}>
@@ -62,11 +58,7 @@ export default function ({navigation}) {
         </ToolButton>
       </View>
       <View style={styles.list}>
-        <List
-          data={categories}
-          onRowPress={navigateToLearningScreen}
-          onPressButton={() => alert('Hello button')}
-        />
+        <List data={categories} navigation={navigation} />
       </View>
       <View style={{marginTop: 23}}>
         <Text style={styles.textStyles}>Seen Prhases:</Text>

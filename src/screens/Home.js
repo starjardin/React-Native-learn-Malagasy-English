@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
     marginLeft: 23,
     marginRight: 23,
     marginTop: 35,
+    justifyContent: 'space-between',
   },
   list: {
     flexBasis: '50%',
@@ -31,8 +32,17 @@ const styles = StyleSheet.create({
     fontSize: 18,
     lineHeight: 22,
     color: '#111827',
+    paddingBottom: 15,
+    // marginTop: 15,
+  },
+  outset: {
+    marginRight: 10,
   },
 });
+
+export const Outset = () => {
+  return <View style={styles.outset}></View>;
+};
 
 export default function ({navigation}) {
   const {state} = useContext(LanguageContext);
@@ -44,21 +54,30 @@ export default function ({navigation}) {
         <ToolButton backgroundColor="#06B6D4">
           <Add />
         </ToolButton>
+        <Outset />
         <LanguageSwitcherButton>
           <LanguageSwitcherIcon />
         </LanguageSwitcherButton>
+        <Outset />
         <ToolButton backgroundColor="#06B6D4">
           <Tick />
         </ToolButton>
+        <Outset />
         <ToolButton backgroundColor="#06B6D4">
           <Doubletick />
         </ToolButton>
+        <Outset />
         <ToolButton backgroundColor="#06B6D4">
           <Settings />
         </ToolButton>
       </View>
-      <View style={styles.list}>
-        <List data={categories} navigation={navigation} />
+      <View style={[styles.list, {marginBottom: 25}]}>
+        <Text style={styles.textStyles}>Select a category:</Text>
+        <List
+          data={categories}
+          navigation={navigation}
+          navigateTo="LearningScreen"
+        />
       </View>
       <View style={{marginTop: 23}}>
         <Text style={styles.textStyles}>Seen Prhases:</Text>

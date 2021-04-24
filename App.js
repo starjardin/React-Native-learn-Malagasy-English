@@ -9,17 +9,16 @@
 import React from 'react';
 import type {Node} from 'react';
 import {
+  Image,
   SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
   Text,
+  TouchableOpacity,
   useColorScheme,
   View,
 } from 'react-native';
-
-import Phrase from './src/components/PhraseTextarea';
-import Button from './src/components/NextButton';
 
 import {
   Colors,
@@ -28,6 +27,8 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+
+import Button from './src/components/ActionButton';
 
 const Section = ({children, title}): Node => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -69,8 +70,7 @@ const App: () => Node = () => {
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
         <Header />
-        <Phrase />
-        <Button buttonText="Next" onPress={alert('You clicked')} disabled />
+        <Button ImageSource={require('./src/icons/error.png')} />
         <View
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,

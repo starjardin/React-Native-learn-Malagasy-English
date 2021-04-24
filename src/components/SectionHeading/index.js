@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {SafeAreaView, StyleSheet, View} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import Button from '../ActionButton';
+import ArrowRight from '../../icons/arrow-right.svg';
 
 const styles = StyleSheet.create({
   listItemStyles: {
@@ -11,14 +13,30 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     paddingLeft: 16,
   },
+  textStyles: {
+    fontStyle: 'normal',
+    fontWeight: 'normal',
+    fontSize: 16,
+    lineHeight: 19,
+    color: '#111827',
+  },
 });
 
 // I choose to render the text and the color from the props, just in case of change in the future
 
-export default function ListItemHeadding({children}) {
+export default function ListItemHeadding({actionText, buttonText}) {
   return (
     <SafeAreaView style={styles.containerStyles}>
-      <View style={styles.listItemStyles}>{children}</View>
+      <View style={styles.listItemStyles}>
+        <Text numberOfLines={1} ellipsizeMode="tail" style={styles.textStyles}>
+          {actionText ? actionText : 'All'}
+        </Text>
+        <Button
+          buttonText={buttonText ? buttonText : 'Learn'}
+          textColor="#06B6D4">
+          <ArrowRight />
+        </Button>
+      </View>
     </SafeAreaView>
   );
 }

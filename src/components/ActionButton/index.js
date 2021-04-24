@@ -3,10 +3,21 @@ import PropTypes from 'prop-types';
 import {StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
 
 const styles = StyleSheet.create({
-  actionButtonStyles: {},
+  actionButtonStyles: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   icons: {
-    width: 20,
-    height: 20,
+    width: 16,
+    height: 16,
+  },
+  TextStyle: {
+    textTransform: 'capitalize',
+    fontWeight: '600',
+    fontSize: 16,
+    lineHeight: 19,
+    textAlign: 'right',
+    paddingRight: 10,
   },
 });
 
@@ -18,17 +29,9 @@ export default function Button({
   ...restProps
 }) {
   return (
-    <TouchableOpacity
-      style={[styles.actionButtonStyles]}
-      onPress={onPress}
-      porps={restProps}>
-      <Text style={{color: textColor}}>{buttonText}</Text>
-      <Image source={ImageSource} />
-      <Image
-        source={require('../../icons//error.svg')}
-        resizeMode="contain"
-        style={styles.icons}
-      />
+    <TouchableOpacity style={styles.actionButtonStyles} activeOpacity={0.5}>
+      <Text style={[styles.TextStyle, {color: textColor}]}> {buttonText} </Text>
+      <Image source={ImageSource} style={styles.ImageIconStyle} />
     </TouchableOpacity>
   );
 }
@@ -42,6 +45,4 @@ Button.defaultProps = {
 Button.propTypes = {
   buttonText: PropTypes.node,
   onPress: PropTypes.func,
-  //   ImageSource: PropTypes.string,
-  //   textColor: PropTypes.color,
 };

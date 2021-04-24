@@ -9,11 +9,13 @@
 import React from 'react';
 import type {Node} from 'react';
 import {
+  Image,
   SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
   Text,
+  TouchableOpacity,
   useColorScheme,
   View,
 } from 'react-native';
@@ -68,11 +70,7 @@ const App: () => Node = () => {
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
         <Header />
-        <Button
-          buttonText="I am an action button"
-          textColor="#FF0000"
-          ImageSource={require('./src/icons/error.svg')}
-        />
+        <Button ImageSource={require('./src/icons/error.png')} />
         <View
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,

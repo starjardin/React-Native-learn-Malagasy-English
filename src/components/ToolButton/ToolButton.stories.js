@@ -10,7 +10,7 @@ const styels = StyleSheet.create({
   },
 });
 
-//? Please provide image format `ImageSource` other than svgs because svg soes not seem to work.
+//? Please provide image format `ImageSource` other than svgs because svg does not seem to work.
 
 storiesOf('Button', module)
   .addDecorator(getStory => (

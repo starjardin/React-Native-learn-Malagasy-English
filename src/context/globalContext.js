@@ -1,7 +1,9 @@
-//? I need global state. I think this is from the data folder
-import React, {useState, useEffect, useReducer} from 'react';
-const LanguageContext = React.createContext();
+import React, {useReducer} from 'react';
+
 import {categories} from '../data/categories.json';
+import {phrases} from '../data/phrases.json';
+
+const LanguageContext = React.createContext();
 
 function reducer(state, action) {
   switch (action.type) {
@@ -12,7 +14,7 @@ const initialState = {
   categories: categories,
   learnt: [],
   seen: [],
-  all: [],
+  phrases: phrases,
   language: ['en', 'mg'],
 };
 

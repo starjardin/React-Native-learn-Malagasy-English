@@ -12,7 +12,7 @@ import Doubletick from '../icons/success-double.svg';
 import LanguageSwitcherIcon from '../icons/lang-switcher';
 import ListItem from '../components/ListItem';
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     marginLeft: 23,
     marginRight: 23,

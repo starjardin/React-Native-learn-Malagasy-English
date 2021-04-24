@@ -22,7 +22,8 @@ export default function Button({
   return (
     <TouchableOpacity
       style={[styles.toolButtonStyles, {backgroundColor: backgroundColor}]}
-      activeOpacity={0.5}>
+      activeOpacity={0.5}
+      onPress={onPress}>
       <View>{children}</View>
     </TouchableOpacity>
   );

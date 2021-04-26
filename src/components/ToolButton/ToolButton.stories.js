@@ -3,14 +3,17 @@ import {storiesOf} from '@storybook/react-native';
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import Button from './';
+import Setting from '../../icons/setting.svg';
+import Chevron from '../../icons/chevron-left.svg';
+import Tick from '../../icons/succes-white.svg';
+import Doubletick from '../../icons/success-double.svg';
+import Add from '../../icons/add.svg';
 
 const styels = StyleSheet.create({
   containerStyles: {
     padding: 20,
   },
 });
-
-//? Please provide image format `ImageSource` other than svgs because svg does not seem to work.
 
 storiesOf('Button', module)
   .addDecorator(getStory => (
@@ -19,35 +22,35 @@ storiesOf('Button', module)
   .add('tool-button setting', () => (
     <Button
       onPress={action('clicked-text for the new button')}
-      ImageSource={require('../../icons/setting.png')}
-      backgroundColor="#06B6D4"
-    />
+      backgroundColor="#06B6D4">
+      <Setting />
+    </Button>
   ))
   .add('tool-button chevron', () => (
     <Button
       onPress={action('clicked-text for the new button')}
-      ImageSource={require('../../icons/chevron-left.png')}
-      backgroundColor="#06B6D4"
-    />
+      backgroundColor="#06B6D4">
+      <Chevron />
+    </Button>
   ))
   .add('tool-button tick', () => (
     <Button
       onPress={action('clicked-text for the new button')}
-      ImageSource={require('../../icons/tick.png')}
-      backgroundColor="#06B6D4"
-    />
+      backgroundColor="#06B6D4">
+      <Tick />
+    </Button>
   ))
   .add('tool-button double tick', () => (
     <Button
       onPress={action('clicked-text for the new button')}
-      ImageSource={require('../../icons/double-tick.png')}
-      backgroundColor="#06B6D4"
-    />
+      backgroundColor="#06B6D4">
+      <Doubletick />
+    </Button>
   ))
   .add('tool-button add', () => (
     <Button
       onPress={action('clicked-text for the new button')}
-      ImageSource={require('../../icons/add.png')}
-      backgroundColor="#06B6D4"
-    />
+      backgroundColor="#06B6D4">
+      <Add />
+    </Button>
   ));

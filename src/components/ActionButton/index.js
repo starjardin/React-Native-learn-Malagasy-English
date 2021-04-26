@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 
 const styles = StyleSheet.create({
   actionButtonStyles: {
@@ -24,25 +24,26 @@ const styles = StyleSheet.create({
 export default function Button({
   onPress,
   buttonText,
-  ImageSource,
   textColor,
+  children,
   ...restProps
 }) {
   return (
     <TouchableOpacity style={styles.actionButtonStyles} activeOpacity={0.5}>
       <Text style={[styles.TextStyle, {color: textColor}]}> {buttonText} </Text>
-      <Image source={ImageSource} style={styles.ImageIconStyle} />
+      {children}
     </TouchableOpacity>
   );
 }
 
 Button.defaultProps = {
   buttonText: null,
-  ImageSource: null,
   onPress: () => {},
+  children: null,
 };
 
 Button.propTypes = {
   buttonText: PropTypes.node,
   onPress: PropTypes.func,
+  children: PropTypes.node,
 };

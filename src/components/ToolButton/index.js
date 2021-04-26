@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 
 const styles = StyleSheet.create({
   toolButtonStyles: {
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
 
 export default function Button({
   onPress,
-  ImageSource,
+  children,
   backgroundColor,
   ...restProps
 }) {
@@ -23,16 +23,17 @@ export default function Button({
     <TouchableOpacity
       style={[styles.toolButtonStyles, {backgroundColor: backgroundColor}]}
       activeOpacity={0.5}>
-      <Image source={ImageSource} />
+      <View>{children}</View>
     </TouchableOpacity>
   );
 }
 
 Button.defaultProps = {
-  ImageSource: null,
   onPress: () => {},
+  children: null,
 };
 
 Button.propTypes = {
   onPress: PropTypes.func,
+  children: PropTypes.node,
 };

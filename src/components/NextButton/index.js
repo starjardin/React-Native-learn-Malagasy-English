@@ -59,7 +59,7 @@ Button.defaultProps = {
 };
 
 Button.propTypes = {
-  buttonText: PropTypes.node,
+  buttonText: PropTypes.string.isRequired,
   onPress: PropTypes.func,
   disabled: PropTypes.bool,
 };

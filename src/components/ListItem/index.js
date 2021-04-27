@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {SafeAreaView, StyleSheet, View} from 'react-native';
+import {SafeAreaView, StyleSheet, View, Text} from 'react-native';
+import Button from '../ActionButton';
+import ArrowRight from '../../icons/arrow-right.svg';
 
 const styles = StyleSheet.create({
   containerStyles: {
@@ -18,23 +20,38 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
     paddingTop: 17,
   },
+  textStyles: {
+    fontStyle: 'normal',
+    fontWeight: 'normal',
+    fontSize: 16,
+    lineHeight: 19,
+    flexBasis: '70%',
+    color: '#111827',
+  },
 });
 
 // I choose to render the text and the color from the props, just in case of change in the future
 
-export default function ListItem({children}) {
+export default function ListItem({name}) {
   return (
     <SafeAreaView style={styles.containerStyles}>
-      <View style={styles.listItemStyles}>{children}</View>
+      <View style={styles.listItemStyles}>
+        <Text numberOfLines={1} ellipsizeMode="tail" style={styles.textStyles}>
+          {name}
+        </Text>
+        <Button buttonText={'Learn'} textColor="#06B6D4">
+          <ArrowRight />
+        </Button>
+      </View>
     </SafeAreaView>
   );
 }
 
 // Default prop types // just ignore if there is no props
 ListItem.defaultProps = {
-  children: null,
+  name: null,
 };
 
 ListItem.propTypes = {
-  children: PropTypes.node,
+  name: PropTypes.string,
 };

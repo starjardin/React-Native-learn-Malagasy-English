@@ -3,7 +3,7 @@ import {storiesOf} from '@storybook/react-native';
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import Button from './';
-import Error from '../../icons/error.svg';
+import Error from '../../icons/x-error.svg';
 import ArrowRight from '../../icons/arrow-right.svg';
 import Success from '../../icons/success-green.svg';
 

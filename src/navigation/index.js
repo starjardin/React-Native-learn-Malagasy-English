@@ -10,10 +10,9 @@ const CurrentListStack = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-      // screenOptions={{
-      //   headerShown: false,
-      // }}>
-      >
+        screenOptions={{
+          headerShown: false,
+        }}>
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="LearningScreen" component={LearningScreen} />
       </Stack.Navigator>

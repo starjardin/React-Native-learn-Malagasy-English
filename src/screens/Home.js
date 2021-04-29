@@ -17,7 +17,6 @@ export const styles = StyleSheet.create({
     marginLeft: 23,
     marginRight: 23,
     marginTop: 35,
-    justifyContent: 'space-between',
   },
   list: {
     flexBasis: '50%',

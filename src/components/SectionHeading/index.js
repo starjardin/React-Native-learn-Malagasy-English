@@ -43,9 +43,11 @@ export default function ListItemHeadding({actionText, buttonText}) {
 
 // Default prop types // just ignore if there is no props
 ListItemHeadding.defaultProps = {
-  children: null,
+  actionText: null,
+  buttonText: null,
 };
 
 ListItemHeadding.propTypes = {
-  children: PropTypes.node,
+  actionText: PropTypes.string,
+  buttonText: PropTypes.string,
 };

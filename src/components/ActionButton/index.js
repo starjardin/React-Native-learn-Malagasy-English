@@ -32,7 +32,8 @@ export default function Button({
     <TouchableOpacity
       style={styles.actionButtonStyles}
       activeOpacity={0.5}
-      onPress={onPressButton}>
+      onPress={onPressButton}
+      {...restProps}>
       <Text style={[styles.TextStyle, {color: textColor}]}> {buttonText} </Text>
       {children}
     </TouchableOpacity>

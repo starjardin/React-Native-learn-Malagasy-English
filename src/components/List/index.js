@@ -2,7 +2,13 @@ import React from 'react';
 import {SafeAreaView, FlatList} from 'react-native';
 import ListItem from '../ListItem';
 
-export default function List({navigation, navigateTo, data}) {
+export default function List({
+  buttonText,
+  data,
+  onRowPress,
+  navigation,
+  navigateTo,
+}) {
   //TODO: You still need to do something with the langauge switcher
   return (
     <SafeAreaView>
@@ -11,11 +17,12 @@ export default function List({navigation, navigateTo, data}) {
         renderItem={({item, index}) => (
           <ListItem
             name={item.name.en}
-            onRowPress={() => {
-              navigation.navigate(`${navigateTo}`, {
-                item,
-              });
-            }}
+            buttonText={buttonText}
+            onRowPress={
+              onRowPress
+                ? onRowPress
+                : () => navigation.navigate(`${navigateTo}`, {item})
+            }
           />
         )}
         keyExtractor={item => item.id}

@@ -4,6 +4,7 @@ import ListItem from '../ListItem';
 
 export default function List({
   buttonText,
+  textColor,
   data,
   onRowPress,
   navigation,
@@ -17,11 +18,16 @@ export default function List({
         renderItem={({item, index}) => (
           <ListItem
             name={item.name.en}
+            //The buttons inside list items can have text from props.
             buttonText={buttonText}
+            textColor={textColor}
             onRowPress={
+              //Some lists do not have onRowPress function but get the navigation props
               onRowPress
                 ? onRowPress
-                : () => navigation.navigate(`${navigateTo}`, {item})
+                : // if the list does not have onRowPress but has navigation props: do this following.
+                  () =>
+                    navigation && navigation.navigate(`${navigateTo}`, {item})
             }
           />
         )}

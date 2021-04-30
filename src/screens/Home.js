@@ -1,11 +1,13 @@
 import React, {useContext} from 'react';
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
 
 import List from '../components/List';
 import {LanguageContext} from '../context/globalContext';
 
 import Navbar from '../components/Navbar';
 import {containerStyles} from '../styles/containerStyles';
+import Subtitle from '../components//Subtitle';
+
 export default function ({navigation}) {
   const {state} = useContext(LanguageContext);
   const {categories} = state;
@@ -13,8 +15,8 @@ export default function ({navigation}) {
   return (
     <View style={containerStyles.container}>
       <Navbar navigation={navigation} page="Home" />
-      <View style={[containerStyles.list, {marginBottom: 25}]}>
-        <Text style={containerStyles.textStyles}>Select a category:</Text>
+      <View style={[containerStyles.list]}>
+        <Subtitle text={'Select a category:'} />
         <List
           data={categories}
           navigation={navigation}

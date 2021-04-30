@@ -35,7 +35,7 @@ function reducer(state, action) {
 const initialState = {
   categories: categories,
   learnt: [],
-  seen: [],
+  seenPhrases: [],
   phrases: phrases,
   language: ['en', 'mg'],
   isNextButtonShown: false,

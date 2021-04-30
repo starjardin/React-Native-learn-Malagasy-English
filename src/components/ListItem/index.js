@@ -15,6 +15,7 @@ export default function ListItem({item, name, onRowPress}) {
   const {state} = useContext(LanguageContext);
   const {categorySelected, setCategorySelected} = useContext(ListContext);
   const {phraseToLearn} = state;
+
   function handlePress() {
     if (onRowPress) {
       onRowPress();

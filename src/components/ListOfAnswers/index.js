@@ -8,6 +8,7 @@ import PhraseTextarea from '../PhraseTextarea';
 
 export default ({route, navigation}) => {
   const [isNextButtonShown, setIsNextButtonShown] = useState(false);
+  const [textColor, setTextColor] = useState('#06B6D4');
   const {item} = route.params;
   const {state, dispatch} = useContext(LanguageContext);
   const {phrasesIds} = item;
@@ -36,15 +37,19 @@ export default ({route, navigation}) => {
       <View>
         <Text>Pick a solution:</Text>
         <List
-          buttonColor="red"
           data={shuffledAnswers}
           buttonText="pick"
-          textColor="#06B6D4"
+          textColor={textColor}
           navigation={navigation}
           navigateTo={'LearningScreenValidation'}
-          onRowPress={() =>
-            navigation.navigate('LearningScreenValidation', {shuffledAnswers})
-          }
+          onRowPress={() => {
+            navigation.navigate('LearningScreenValidation', {shuffledAnswers});
+            dispatch({
+              type: 'LEARN_PHRASE',
+              phrase: phraseToLearn?.name,
+              category: item.name.en,
+            });
+          }}
         />
       </View>
       <View>{isNextButtonShown && <Text>Hello world</Text>}</View>

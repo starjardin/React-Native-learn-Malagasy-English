@@ -1,7 +1,6 @@
-import React, {useContext, useState} from 'react';
+import React from 'react';
 import {View} from 'react-native';
 
-import {LanguageContext} from '../context/globalContext';
 import ToolButton from '../components/ToolButton';
 import LanguageSwitcherButton from '../components/LanguageSwitcherButton';
 import Settings from '../icons/setting-icon.svg';

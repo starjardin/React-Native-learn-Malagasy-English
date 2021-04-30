@@ -7,16 +7,23 @@ const LanguageContext = React.createContext();
 
 function reducer(state, action) {
   switch (action.type) {
-    case 'FIND_ANSWERS': {
+    case 'FIND_ANSWER': {
       return {
         ...state,
-        answers: [],
+        answer: action.payload,
       };
     }
     case 'TOGGLE_NEXT_BUTTON': {
       return {
         ...state,
         isNextButtonShown: true,
+      };
+    }
+    case 'LEARN_PHRASE': {
+      return {
+        ...state,
+        categoryToLearn: action.category,
+        phraseToLearn: action.phrase,
       };
     }
     default: {
@@ -31,8 +38,10 @@ const initialState = {
   seen: [],
   phrases: phrases,
   language: ['en', 'mg'],
-  answers: [],
   isNextButtonShown: false,
+  categoryToLearn: {},
+  phraseToLearn: {},
+  answer: {},
 };
 
 function ContextProvider(props) {

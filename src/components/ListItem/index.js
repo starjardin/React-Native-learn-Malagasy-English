@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {SafeAreaView, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import Button from '../ActionButton';
@@ -32,8 +32,13 @@ const styles = StyleSheet.create({
 
 // I choose to render the text and the color from the props, just in case of change in the future
 
-export default function ListItem({name, onRowPress, buttonText, textColor}) {
-  const textRef = useRef('myText');
+export default function ListItem({
+  name,
+  onRowPress,
+  buttonText,
+  textColor,
+  rowRef,
+}) {
   return (
     <SafeAreaView style={styles.containerStyles}>
       <TouchableOpacity
@@ -41,11 +46,12 @@ export default function ListItem({name, onRowPress, buttonText, textColor}) {
         //if onRowPress exists form the parent element then invoke it or else just return null
         onPress={onRowPress ? onRowPress : null}>
         <Text
+          ref={rowRef}
           numberOfLines={1}
           ellipsizeMode="tail"
           style={[styles.textStyles]}
           // textColor && {color: textColor}]}
-          ref={textRef}>
+        >
           {name}
         </Text>
         <Button

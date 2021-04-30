@@ -1,4 +1,4 @@
-import React, {useContext, useState, useEffect} from 'react';
+import React, {useContext} from 'react';
 import {View, Text} from 'react-native';
 
 import {LanguageContext} from '../../context/globalContext';
@@ -7,7 +7,6 @@ import {shuffle} from '../../utils/shuffle';
 import PhraseTextarea from '../PhraseTextarea';
 
 export default ({route, navigation}) => {
-  const [textColor, setTextColor] = useState('#06B6D4');
   const {item} = route.params;
   const {state, dispatch} = useContext(LanguageContext);
   const {phrasesIds} = item;
@@ -32,13 +31,12 @@ export default ({route, navigation}) => {
   return (
     <View>
       <Text>Category: {item.name.en}</Text>
-      <PhraseTextarea phrase={phraseToLearn?.name.mg} />
+      <PhraseTextarea phrase={phraseToLearn.name?.mg} />
       <View>
         <Text>Pick a solution:</Text>
         <List
           data={shuffledAnswers}
           buttonText="pick"
-          textColor={textColor}
           navigation={navigation}
           navigateTo={'LearningScreenValidation'}
           onRowPress={() => {

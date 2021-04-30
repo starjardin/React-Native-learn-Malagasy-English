@@ -40,7 +40,7 @@ export const styles = StyleSheet.create({
 });
 
 export const Outset = () => {
-  return <View style={styles.outset}></View>;
+  return <View style={styles.outset} />;
 };
 
 export default function ({navigation}) {
@@ -80,7 +80,7 @@ export default function ({navigation}) {
           textColor="#06B6D4"
         />
       </View>
-      <View style={{marginTop: 23}}>
+      {/* <View style={{marginTop: 23}}>
         <Text style={styles.textStyles}>Seen Prhases:</Text>
         <ListItem
           name={'{seenPhrase.length}Words and phrases'}
@@ -97,7 +97,7 @@ export default function ({navigation}) {
             alert('You pressed and clicked');
           }}
         />
-      </View>
+      </View> */}
     </View>
   );
 }

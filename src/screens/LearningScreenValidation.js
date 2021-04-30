@@ -4,9 +4,12 @@ import List from '../components/List';
 import Button from '../components/NextButton';
 import PhraseTextarea from '../components/PhraseTextarea';
 import {LanguageContext} from '../context/globalContext';
+import {ListContext} from '../components/List';
 
 export default ({route, navigation}) => {
   const {state} = useContext(LanguageContext);
+  const {categorySelected, setCategorySelected} = useContext(ListContext);
+  console.log(categorySelected);
   const {answer} = state;
   const phrase = state.phraseToLearn.mg;
   const category = state.categoryToLearn;

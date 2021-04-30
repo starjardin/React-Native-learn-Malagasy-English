@@ -1,21 +1,11 @@
-import React, {useContext, useRef} from 'react';
+import React, {useContext, useState} from 'react';
 import {SafeAreaView, FlatList} from 'react-native';
 import {LanguageContext} from '../../context/globalContext';
 import ListItem from '../ListItem';
 
-export default function List({
-  buttonText,
-  textColor,
-  data,
-  onRowPress,
-  navigation,
-  navigateTo,
-}) {
-  const {dispatch, state} = useContext(LanguageContext);
-  const {answer} = state;
-  const phrase = state.phraseToLearn.mg;
-  const category = state.categoryToLearn;
-  const rowRef = useRef(null);
+export default function List({data, onRowPress, navigation, navigateTo}) {
+  const {dispatch} = useContext(LanguageContext);
+
   //TODO: You still need to do something with the langauge switcher
 
   function handlePress(item) {
@@ -29,22 +19,40 @@ export default function List({
     }
   }
 
+  const renderItems = ({item}) => {
+    return (
+      <ListItem
+        item={item}
+        name={item.name.en}
+        onRowPress={() => handlePress(item)}
+      />
+    );
+  };
+
   return (
     <SafeAreaView>
       <FlatList
         data={data}
-        renderItem={({item, index}) => (
-          <ListItem
-            name={item.name.en}
-            rowRef={rowRef}
-            //The buttons inside list items can have text from props.
-            buttonText={buttonText}
-            textColor={textColor}
-            onRowPress={() => handlePress(item)}
-          />
-        )}
+        renderItem={renderItems}
         keyExtractor={item => item.id}
       />
     </SafeAreaView>
   );
 }
+
+const ListContext = React.createContext();
+
+const ListContextProvider = ({children}) => {
+  const [categorySelected, setCategorySelected] = useState('');
+  return (
+    <ListContext.Provider
+      value={{
+        categorySelected,
+        setCategorySelected,
+      }}>
+      {children}
+    </ListContext.Provider>
+  );
+};
+
+export {ListContextProvider, ListContext};

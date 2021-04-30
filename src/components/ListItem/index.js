@@ -1,42 +1,36 @@
-import React, {useState, useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import PropTypes from 'prop-types';
-import {SafeAreaView, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {
+  SafeAreaView,
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+} from 'react-native';
 import Button from '../ActionButton';
 import ArrowRight from '../../icons/arrow-right.svg';
 import Correct from '../../icons/success-green';
 import {LanguageContext} from '../../context/globalContext';
+import {listItemStyles} from '../../styles/ListemStyles';
+import {ListContext} from '../List';
 
 const styles = StyleSheet.create({
-  containerStyles: {
-    borderBottomWidth: 1,
-    borderStyle: 'solid',
-    borderBottomColor: '#E5E5E5',
+  isSelectedStyle: {
+    backgroundColor: '#fff',
+    ...listItemStyles.itemStyles,
   },
-
-  listItemStyles: {
-    backgroundColor: '#FFFFFF',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingBottom: 17,
-    paddingRight: 20,
-    paddingLeft: 16,
-    paddingTop: 17,
-  },
-  textStyles: {
-    fontStyle: 'normal',
-    fontWeight: 'normal',
-    fontSize: 16,
-    lineHeight: 19,
-    flexBasis: '70%',
-    color: '#111827',
+  categoryselectedStyle: {
+    ...listItemStyles.itemStyles,
+    backgroundColor: '#ff0',
   },
 });
 
 // I choose to render the text and the color from the props, just in case of change in the future
 
-export default function ListItem({name, onRowPress, textColor, rowRef}) {
+export default function ListItem({item, name, onRowPress}) {
   const {state} = useContext(LanguageContext);
-  const {phraseToLearn, answer} = state;
+  const {categorySelected, setCategorySelected} = useContext(ListContext);
+  const {phraseToLearn} = state;
 
   function handlePress() {
     if (onRowPress) {
@@ -44,38 +38,52 @@ export default function ListItem({name, onRowPress, textColor, rowRef}) {
     }
   }
 
+  let buttons = (
+    <Button
+      buttonText={
+        name?.trim().toLowerCase() === phraseToLearn.en?.trim().toLowerCase()
+          ? 'correct'
+          : 'Pick'
+      }
+      textColor={
+        name?.trim().toLowerCase() === phraseToLearn.en?.trim().toLowerCase()
+          ? '#06D440'
+          : '#06B6D4'
+      }
+      onPressButton={onRowPress ? onRowPress : null}>
+      {name === phraseToLearn.en ? <Correct /> : <ArrowRight />}
+    </Button>
+  );
+
+  let listView = (
+    // <View style={viewStyle}>
+    <View style={listItemStyles.itemStyles}>
+      <Text
+        numberOfLines={1}
+        ellipsizeMode="tail"
+        style={[listItemStyles.textStyles]}>
+        {name}
+      </Text>
+      {buttons}
+      {/* {TODO: May be I need to figure something out here} */}
+    </View>
+  );
+
   let touchProps = {
-    style: [styles.listItemStyles],
+    // style: listItemStyles.containerStyles,
+    style: [
+      listItemStyles.containerStyles,
+      categorySelected === item.id && styles.categoryselectedStyle,
+    ],
+    onPress: () => {
+      handlePress(name);
+      setCategorySelected(item.id);
+    },
   };
 
   return (
-    <SafeAreaView style={styles.containerStyles}>
-      <TouchableOpacity
-        {...touchProps}
-        //if onRowPress exists from the parent element then invoke it or else just return null
-        onPress={() => handlePress(name)}>
-        <Text
-          numberOfLines={1}
-          ellipsizeMode="tail"
-          style={[styles.textStyles]}>
-          {name}
-        </Text>
-        {/* {TODO: May be I need to figure something out here} */}
-        <Button
-          buttonText={
-            name.trim().toLowerCase() === phraseToLearn.en.trim().toLowerCase()
-              ? 'correct'
-              : 'Pick'
-          }
-          textColor={
-            name.trim().toLowerCase() === phraseToLearn.en.trim().toLowerCase()
-              ? '#06D440'
-              : '#06B6D4'
-          }
-          onPressButton={onRowPress ? onRowPress : null}>
-          {name === phraseToLearn.en ? <Correct /> : <ArrowRight />}
-        </Button>
-      </TouchableOpacity>
+    <SafeAreaView>
+      <TouchableOpacity {...touchProps}>{listView}</TouchableOpacity>
     </SafeAreaView>
   );
 }
@@ -92,3 +100,44 @@ ListItem.propTypes = {
   onRowPress: PropTypes.func,
   buttonText: PropTypes.string,
 };
+
+/* 
+constructor(props) {
+  super(props);
+  this.state = {
+    selectedFriendIds: [],
+  }
+}
+
+selectFriend(friend) {
+  this.setState({
+    selectedFriendIds: this.state.selectedFriendIds.concat([friend.id]),
+  });
+}
+
+selectedFriendIds
+renderFriend
+friendItem
+viewStyle = styles
+isFriendSelected = bread and butter
+
+renderFriend(friend) {
+  const isFriendSelected = this.state.selectedFriendIds.indexOf(friend.id) !== -1;
+  const viewStyle = isFriendSelected ?
+    styles.profilePictureContainerSelected : styles.profilePictureContainerNoBorder;
+
+  return (
+    <TouchableHighlight onPress={ () => this.selectFriend(friend) }>
+      <View style={styles.friendItem}>
+        <View style={viewStyle}>
+          <Image
+            source={{uri: 'https://graph.facebook.com/' + friend.id + '/picture?width=500&height=500'}}
+            style={styles.profilePicture}
+          />
+        </View>
+        <Text style={styles.profileName}>{friend.name}</Text>
+      </View>
+    </TouchableHighlight>
+  );
+}
+*/

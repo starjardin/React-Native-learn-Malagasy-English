@@ -7,10 +7,16 @@ const LanguageContext = React.createContext();
 
 function reducer(state, action) {
   switch (action.type) {
-    case 'answerQuestion': {
+    case 'FIND_ANSWERS': {
       return {
         ...state,
-        rightAnswer: action.payload,
+        answers: [],
+      };
+    }
+    case 'TOGGLE_NEXT_BUTTON': {
+      return {
+        ...state,
+        isNextButtonShown: true,
       };
     }
     default: {
@@ -25,11 +31,13 @@ const initialState = {
   seen: [],
   phrases: phrases,
   language: ['en', 'mg'],
-  rightAnswer: '',
+  answers: [],
+  isNextButtonShown: false,
 };
 
 function ContextProvider(props) {
   const [state, dispatch] = useReducer(reducer, initialState);
+
   return (
     <LanguageContext.Provider
       value={{

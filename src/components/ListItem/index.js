@@ -1,12 +1,6 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext} from 'react';
 import PropTypes from 'prop-types';
-import {
-  SafeAreaView,
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-} from 'react-native';
+import {SafeAreaView, View, Text, TouchableOpacity} from 'react-native';
 import Button from '../ActionButton';
 import ArrowRight from '../../icons/arrow-right.svg';
 import Correct from '../../icons/success-green';
@@ -14,17 +8,6 @@ import Incorrect from '../../icons/x-error.svg';
 import {LanguageContext} from '../../context/globalContext';
 import {listItemStyles} from '../../styles/ListemStyles';
 import {ListContext} from '../List';
-
-const styles = StyleSheet.create({
-  isSelectedStyle: {
-    backgroundColor: '#fff',
-    ...listItemStyles.itemStyles,
-  },
-  categoryselectedStyle: {
-    ...listItemStyles.itemStyles,
-    backgroundColor: '#ff0',
-  },
-});
 
 // I choose to render the text and the color from the props, just in case of change in the future
 
@@ -38,33 +21,22 @@ export default function ListItem({item, name, onRowPress}) {
     }
   }
 
-  let buttons = (
-    <Button
-      buttonText={'Pick'}
-      textColor={'#06B6D4'}
-      onPressButton={onRowPress ? onRowPress : null}>
-      <ArrowRight />
-    </Button>
-  );
-  // let buttons = (
-  //   <Button
-  //     buttonText={
-  //       name?.trim().toLowerCase() === phraseToLearn.en?.trim().toLowerCase()
-  //         ? 'correct'
-  //         : 'Pick'
-  //     }
-  //     textColor={
-  //       name?.trim().toLowerCase() === phraseToLearn.en?.trim().toLowerCase()
-  //         ? '#06D440'
-  //         : '#06B6D4'
-  //     }
-  //     onPressButton={onRowPress ? onRowPress : null}>
-  //     {name === phraseToLearn.en ? <Correct /> : <ArrowRight />}
-  //   </Button>
-  // );
+  const buttons =
+    name === phraseToLearn.en && categorySelected ? (
+      <Button buttonText={'correct'} textColor={'#06D440'}>
+        <Correct />
+      </Button>
+    ) : categorySelected === item.id ? (
+      <Button buttonText={'wrong'} textColor={'#D4068E'}>
+        <Incorrect />
+      </Button>
+    ) : (
+      <Button buttonText={'Pick'} textColor={'#06B6D4'}>
+        <ArrowRight />
+      </Button>
+    );
 
-  let listView = (
-    // <View style={viewStyle}>
+  const listItemView = (
     <View style={listItemStyles.itemStyles}>
       <Text
         numberOfLines={1}
@@ -72,30 +44,12 @@ export default function ListItem({item, name, onRowPress}) {
         style={[listItemStyles.textStyles]}>
         {name}
       </Text>
-      {name === phraseToLearn.en && categorySelected ? (
-        <Button buttonText={'correct'} textColor={'#06D440'}>
-          <Correct />
-        </Button>
-      ) : categorySelected === item.id ? (
-        <Button buttonText={'wrong'} textColor={'#D4068E'}>
-          <Incorrect />
-        </Button>
-      ) : (
-        <Button buttonText={'Pick'} textColor={'#06B6D4'}>
-          <ArrowRight />
-        </Button>
-      )}
-      {/* {TODO: May be I need to figure something out here} */}
+      {buttons}
     </View>
   );
 
-  let touchProps = {
-    // style: listItemStyles.containerStyles,
-    style: [
-      listItemStyles.containerStyles,
-      // categorySelected === item.id && styles.categoryselectedStyle,
-    ],
-
+  const touchProps = {
+    style: [listItemStyles.containerStyles],
     onPress: () => {
       handlePress(name);
       setCategorySelected(item.id);
@@ -104,7 +58,7 @@ export default function ListItem({item, name, onRowPress}) {
 
   return (
     <SafeAreaView>
-      <TouchableOpacity {...touchProps}>{listView}</TouchableOpacity>
+      <TouchableOpacity {...touchProps}>{listItemView}</TouchableOpacity>
     </SafeAreaView>
   );
 }
@@ -121,44 +75,3 @@ ListItem.propTypes = {
   onRowPress: PropTypes.func,
   buttonText: PropTypes.string,
 };
-
-/* 
-constructor(props) {
-  super(props);
-  this.state = {
-    selectedFriendIds: [],
-  }
-}
-
-selectFriend(friend) {
-  this.setState({
-    selectedFriendIds: this.state.selectedFriendIds.concat([friend.id]),
-  });
-}
-
-selectedFriendIds
-renderFriend
-friendItem
-viewStyle = styles
-isFriendSelected = bread and butter
-
-renderFriend(friend) {
-  const isFriendSelected = this.state.selectedFriendIds.indexOf(friend.id) !== -1;
-  const viewStyle = isFriendSelected ?
-    styles.profilePictureContainerSelected : styles.profilePictureContainerNoBorder;
-
-  return (
-    <TouchableHighlight onPress={ () => this.selectFriend(friend) }>
-      <View style={styles.friendItem}>
-        <View style={viewStyle}>
-          <Image
-            source={{uri: 'https://graph.facebook.com/' + friend.id + '/picture?width=500&height=500'}}
-            style={styles.profilePicture}
-          />
-        </View>
-        <Text style={styles.profileName}>{friend.name}</Text>
-      </View>
-    </TouchableHighlight>
-  );
-}
-*/

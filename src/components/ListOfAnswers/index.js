@@ -1,16 +1,18 @@
 import React, {useContext} from 'react';
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
 
 import {LanguageContext} from '../../context/globalContext';
 import List from '../List';
 import {shuffle} from '../../utils/shuffle';
 import PhraseTextarea from '../PhraseTextarea';
+import Subtitle from '../Subtitle';
 
 export default ({route, navigation}) => {
   const {item} = route.params;
   const {state, dispatch} = useContext(LanguageContext);
-  const {phrasesIds} = item;
-  const {phrases} = state;
+  let {phrasesIds} = item;
+  const {phrases, categories} = state;
+
   const randomPhrasesIdsNumber = Math.floor(Math.random() * phrasesIds.length);
   const phraseToLearn = phrases.find(
     el => el.id === phrasesIds[randomPhrasesIdsNumber],
@@ -30,10 +32,10 @@ export default ({route, navigation}) => {
 
   return (
     <View>
-      <Text>Category: {item.name.en}</Text>
+      <Subtitle text={`Category : ${item.name.en}`} />
       <PhraseTextarea phrase={phraseToLearn.name?.mg} />
       <View>
-        <Text>Pick a solution:</Text>
+        <Subtitle text={'Pick a solution:'} />
         <List
           data={shuffledAnswers}
           buttonText="pick"
@@ -43,7 +45,7 @@ export default ({route, navigation}) => {
             navigation.navigate('LearningScreenValidation', {shuffledAnswers});
             dispatch({
               type: 'LEARN_PHRASE',
-              phrase: phraseToLearn?.name,
+              phrase: phraseToLearn,
               category: item.name.en,
             });
           }}

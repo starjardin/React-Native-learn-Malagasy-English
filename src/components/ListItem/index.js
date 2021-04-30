@@ -13,7 +13,7 @@ import {ListContext} from '../List';
 
 export default function ListItem({item, name, onRowPress}) {
   const {state} = useContext(LanguageContext);
-  const {categorySelected, setCategorySelected} = useContext(ListContext);
+  const {itemSelected, setItemSelected} = useContext(ListContext);
   const {phraseToLearn} = state;
 
   function handlePress() {
@@ -23,11 +23,11 @@ export default function ListItem({item, name, onRowPress}) {
   }
 
   const buttons =
-    name === phraseToLearn.en && categorySelected ? (
+    name === phraseToLearn.name?.en && itemSelected ? (
       <Button buttonText={'correct'} textColor={'#06D440'}>
         <Correct />
       </Button>
-    ) : categorySelected === item.id ? (
+    ) : phraseToLearn.name?.en && itemSelected === item.id ? (
       <Button buttonText={'wrong'} textColor={'#D4068E'}>
         <Incorrect />
       </Button>
@@ -53,7 +53,7 @@ export default function ListItem({item, name, onRowPress}) {
     style: [listItemStyles.containerStyles],
     onPress: () => {
       handlePress(name);
-      setCategorySelected(item.id);
+      setItemSelected(item.id);
     },
   };
 
@@ -68,11 +68,9 @@ export default function ListItem({item, name, onRowPress}) {
 ListItem.defaultProps = {
   name: null,
   onRowPress: null,
-  buttonText: null,
 };
 
 ListItem.propTypes = {
   name: PropTypes.string,
   onRowPress: PropTypes.func,
-  buttonText: PropTypes.string,
 };

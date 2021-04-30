@@ -1,4 +1,4 @@
-import React, {useReducer} from 'react';
+import React, {useReducer, useEffect} from 'react';
 
 import {categories} from '../data/categories.json';
 import {phrases} from '../data/phrases.json';
@@ -7,18 +7,20 @@ const LanguageContext = React.createContext();
 
 function reducer(state, action) {
   switch (action.type) {
+    case 'LOAD_PAGE': {
+      return {
+        ...state,
+        categories: categories,
+        phrases: phrases,
+      };
+    }
     case 'FIND_ANSWER': {
       return {
         ...state,
         answer: action.payload,
       };
     }
-    case 'TOGGLE_NEXT_BUTTON': {
-      return {
-        ...state,
-        isNextButtonShown: true,
-      };
-    }
+
     case 'LEARN_PHRASE': {
       return {
         ...state,
@@ -26,6 +28,13 @@ function reducer(state, action) {
         phraseToLearn: action.phrase,
       };
     }
+    case 'SEEN_ITEM': {
+      return {
+        ...state,
+        seenPhrases: [...state.seenPhrases, action.payload],
+      };
+    }
+
     default: {
       return state;
     }
@@ -33,12 +42,10 @@ function reducer(state, action) {
 }
 
 const initialState = {
-  categories: categories,
-  learnt: [],
+  categories: [],
+  learntPhrases: [],
   seenPhrases: [],
-  phrases: phrases,
-  language: ['en', 'mg'],
-  isNextButtonShown: false,
+  phrases: [],
   categoryToLearn: {},
   phraseToLearn: {},
   answer: {},
@@ -46,6 +53,12 @@ const initialState = {
 
 function ContextProvider(props) {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    dispatch({
+      type: 'LOAD_PAGE',
+    });
+  }, []);
 
   return (
     <LanguageContext.Provider

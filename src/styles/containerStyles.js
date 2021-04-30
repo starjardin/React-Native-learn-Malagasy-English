@@ -18,4 +18,8 @@ export const containerStyles = StyleSheet.create({
     color: '#111827',
     paddingBottom: 15,
   },
+
+  nextButtonStyle: {
+    marginTop: 60,
+  },
 });

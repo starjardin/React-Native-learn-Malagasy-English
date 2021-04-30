@@ -10,6 +10,7 @@ import {
 import Button from '../ActionButton';
 import ArrowRight from '../../icons/arrow-right.svg';
 import Correct from '../../icons/success-green';
+import Incorrect from '../../icons/x-error.svg';
 import {LanguageContext} from '../../context/globalContext';
 import {listItemStyles} from '../../styles/ListemStyles';
 import {ListContext} from '../List';
@@ -31,7 +32,6 @@ export default function ListItem({item, name, onRowPress}) {
   const {state} = useContext(LanguageContext);
   const {categorySelected, setCategorySelected} = useContext(ListContext);
   const {phraseToLearn} = state;
-
   function handlePress() {
     if (onRowPress) {
       onRowPress();
@@ -40,20 +40,28 @@ export default function ListItem({item, name, onRowPress}) {
 
   let buttons = (
     <Button
-      buttonText={
-        name?.trim().toLowerCase() === phraseToLearn.en?.trim().toLowerCase()
-          ? 'correct'
-          : 'Pick'
-      }
-      textColor={
-        name?.trim().toLowerCase() === phraseToLearn.en?.trim().toLowerCase()
-          ? '#06D440'
-          : '#06B6D4'
-      }
+      buttonText={'Pick'}
+      textColor={'#06B6D4'}
       onPressButton={onRowPress ? onRowPress : null}>
-      {name === phraseToLearn.en ? <Correct /> : <ArrowRight />}
+      <ArrowRight />
     </Button>
   );
+  // let buttons = (
+  //   <Button
+  //     buttonText={
+  //       name?.trim().toLowerCase() === phraseToLearn.en?.trim().toLowerCase()
+  //         ? 'correct'
+  //         : 'Pick'
+  //     }
+  //     textColor={
+  //       name?.trim().toLowerCase() === phraseToLearn.en?.trim().toLowerCase()
+  //         ? '#06D440'
+  //         : '#06B6D4'
+  //     }
+  //     onPressButton={onRowPress ? onRowPress : null}>
+  //     {name === phraseToLearn.en ? <Correct /> : <ArrowRight />}
+  //   </Button>
+  // );
 
   let listView = (
     // <View style={viewStyle}>
@@ -64,7 +72,19 @@ export default function ListItem({item, name, onRowPress}) {
         style={[listItemStyles.textStyles]}>
         {name}
       </Text>
-      {buttons}
+      {name === phraseToLearn.en && categorySelected ? (
+        <Button buttonText={'correct'} textColor={'#06D440'}>
+          <Correct />
+        </Button>
+      ) : categorySelected === item.id ? (
+        <Button buttonText={'wrong'} textColor={'#D4068E'}>
+          <Incorrect />
+        </Button>
+      ) : (
+        <Button buttonText={'Pick'} textColor={'#06B6D4'}>
+          <ArrowRight />
+        </Button>
+      )}
       {/* {TODO: May be I need to figure something out here} */}
     </View>
   );
@@ -73,8 +93,9 @@ export default function ListItem({item, name, onRowPress}) {
     // style: listItemStyles.containerStyles,
     style: [
       listItemStyles.containerStyles,
-      categorySelected === item.id && styles.categoryselectedStyle,
+      // categorySelected === item.id && styles.categoryselectedStyle,
     ],
+
     onPress: () => {
       handlePress(name);
       setCategorySelected(item.id);

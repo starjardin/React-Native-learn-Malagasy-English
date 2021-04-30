@@ -11,8 +11,13 @@ export default ({route, navigation}) => {
   const phrase = state.phraseToLearn.mg;
   const category = state.categoryToLearn;
   const {shuffledAnswers} = route.params;
-  const [seenResponse, setSeenResponse] = useState(false);
+  const correctAnswer = answer.name.mg === phrase;
 
+  const ListOfView = correctAnswer ? (
+    <List data={shuffledAnswers} buttonText={'Pick'} textColor="#ff00ff" />
+  ) : (
+    <List data={shuffledAnswers} buttonText={'Pick'} textColor={'#00ffff'} />
+  );
   return (
     <View>
       <View>
@@ -21,16 +26,11 @@ export default ({route, navigation}) => {
       <View>
         <PhraseTextarea phrase={phrase} />
       </View>
-      <List
-        data={shuffledAnswers}
-        buttonText={'Pick'}
-        textColor={answer.name.mg === phrase ? '#ff00ff' : '#00ffff'}
-      />
+      {ListOfView}
       <Button
         buttonText={'Next'}
         onPress={() => {
           navigation.navigate('LearningScreen');
-          setSeenResponse(!seenResponse);
         }}
       />
     </View>

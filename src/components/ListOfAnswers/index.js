@@ -7,7 +7,6 @@ import {shuffle} from '../../utils/shuffle';
 import PhraseTextarea from '../PhraseTextarea';
 
 export default ({route, navigation}) => {
-  const [isNextButtonShown, setIsNextButtonShown] = useState(false);
   const [textColor, setTextColor] = useState('#06B6D4');
   const {item} = route.params;
   const {state, dispatch} = useContext(LanguageContext);
@@ -52,7 +51,6 @@ export default ({route, navigation}) => {
           }}
         />
       </View>
-      <View>{isNextButtonShown && <Text>Hello world</Text>}</View>
     </View>
   );
 };

@@ -26,10 +26,8 @@ export default function List({
         type: 'FIND_ANSWER',
         payload: item,
       });
-      // rowRef.current;
     }
   }
-  console.log(rowRef);
 
   return (
     <SafeAreaView>

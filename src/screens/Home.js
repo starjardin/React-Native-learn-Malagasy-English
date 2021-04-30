@@ -76,6 +76,8 @@ export default function ({navigation}) {
           data={categories}
           navigation={navigation}
           navigateTo="LearningScreen"
+          buttonText="Learn"
+          textColor="#06B6D4"
         />
       </View>
       <View style={{marginTop: 23}}>

@@ -34,3 +34,11 @@ export default ({route, navigation}) => {
     </View>
   );
 };
+
+// onAnswer = (e, newQuestion) => { e.target.innertext === questions[newQuestion].answer ? this.correct() : this.wrong()
+
+//<TouchableOpacity onPress={() => onAnswer(question, answer)} >
+//      <Text>{answer}</Text>
+//  </TouchableOpacity>
+
+// wlo1

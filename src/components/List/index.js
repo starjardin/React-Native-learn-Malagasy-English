@@ -40,15 +40,16 @@ export default function List({data, onRowPress, navigation, navigateTo}) {
   );
 }
 
+// The following code is to save id only shared between the list component
 const ListContext = React.createContext();
 
 const ListContextProvider = ({children}) => {
-  const [categorySelected, setCategorySelected] = useState('');
+  const [itemSelected, setItemSelected] = useState('');
   return (
     <ListContext.Provider
       value={{
-        categorySelected,
-        setCategorySelected,
+        itemSelected,
+        setItemSelected,
       }}>
       {children}
     </ListContext.Provider>

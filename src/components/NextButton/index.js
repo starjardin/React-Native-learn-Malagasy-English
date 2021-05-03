@@ -43,7 +43,8 @@ export default function Button({onPress, buttonText, disabled, ...restProps}) {
   return (
     <TouchableHighlight
       style={[styles.nextButtonStyles, disabled && styles.disabledButtonStyles]}
-      onPress={disabled ? () => null : onPress}>
+      onPress={disabled ? () => null : onPress}
+      {...restProps}>
       <Text
         style={[styles.textColor, disabled && styles.textColorDisabledButtoon]}>
         {buttonText}

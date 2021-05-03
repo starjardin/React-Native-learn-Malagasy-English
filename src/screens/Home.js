@@ -12,12 +12,11 @@ import Doubletick from '../icons/success-double.svg';
 import LanguageSwitcherIcon from '../icons/lang-switcher';
 import ListItem from '../components/ListItem';
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     marginLeft: 23,
     marginRight: 23,
     marginTop: 35,
-    justifyContent: 'space-between',
   },
   list: {
     flexBasis: '50%',
@@ -77,6 +76,8 @@ export default function ({navigation}) {
           data={categories}
           navigation={navigation}
           navigateTo="LearningScreen"
+          buttonText="Learn"
+          textColor="#06B6D4"
         />
       </View>
       <View style={{marginTop: 23}}>

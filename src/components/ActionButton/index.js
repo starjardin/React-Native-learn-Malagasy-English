@@ -26,14 +26,20 @@ export default function Button({
   buttonText,
   textColor,
   children,
+  style,
+  rowRef,
   ...restProps
 }) {
+  let touchProps = {
+    style: [styles.actionButtonStyles, {...style}],
+    activeOpacity: 0.5,
+    onPress: onPressButton,
+  };
   return (
-    <TouchableOpacity
-      style={styles.actionButtonStyles}
-      activeOpacity={0.5}
-      onPress={onPressButton}>
-      <Text style={[styles.TextStyle, {color: textColor}]}> {buttonText} </Text>
+    <TouchableOpacity {...touchProps}>
+      <Text style={[styles.TextStyle, {color: textColor}]} ref={rowRef}>
+        {buttonText}
+      </Text>
       {children}
     </TouchableOpacity>
   );
@@ -46,7 +52,48 @@ Button.defaultProps = {
 };
 
 Button.propTypes = {
-  buttonText: PropTypes.node,
+  buttonText: PropTypes.string,
   onPress: PropTypes.func,
   children: PropTypes.node,
 };
+
+/*
+
+    App
+      List
+        ListItem // renders one Action button // click here
+        ** if I change something here : all of the buttons will changed
+        Basicaly I can not really change my props over here.
+          action button
+
+      Find the clicked element and target it.
+
+      key={answer.id}
+      text={answer.text}
+      onPress={() => this.answer(answer.correct)}
+      style={this.state.btnColor}
+      correct={this.state.answerCorrect
+
+      nswer.id === selectedId && answerCorrect ? 
+      styleForCorrectAnswer : 
+      answer.id === selectedId && !answerCorrect ?
+        styleForWrongAnswer :
+      styleForDefaultAnswer
+*/
+
+/*
+
+  ListItem: render one button Each
+  {this.state.correct
+?
+<TouchableOpacity onPress={onPress} style={{backgroundColor:'green'}}>
+      <Text style={styles.text}>Correct</Text>
+    </TouchableOpacity>
+:
+<TouchableOpacity onPress={onPress} style={{backgroundColor:'red'}}>
+      <Text style={styles.text}>False</Text>
+    </TouchableOpacity>
+}
+
+
+*/

@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {View} from 'react-native';
+import {SafeAreaView, View} from 'react-native';
 
 import List from '../components/List';
 import {LanguageContext} from '../context/globalContext';
@@ -13,9 +13,9 @@ export default function ({navigation}) {
   const {categories} = state;
 
   return (
-    <View style={containerStyles.container}>
-      <Navbar navigation={navigation} page="Home" />
-      <View style={[containerStyles.list]}>
+    <SafeAreaView>
+      <View style={containerStyles.container}>
+        <Navbar navigation={navigation} page="Home" />
         <Subtitle text={'Select a category:'} />
         <List
           data={categories}
@@ -25,28 +25,6 @@ export default function ({navigation}) {
           textColor="#06B6D4"
         />
       </View>
-      {/* <View style={{marginTop: 23}}>
-        <Text style={styles.textStyles}>Seen Prhases:</Text>
-        <ListItem
-          data={seenPhrases}
-          navigation={navigation}
-          navigateTo="LearningScreen"
-          buttonText="Learn"
-          textColor="#06B6D4"
-          onRowPress={() => {
-            alert('You pressed and clicked');
-          }}
-        />
-      </View> */}
-      {/* <View style={{marginTop: 23}}>
-        <Text style={styles.textStyles}>Learnt Prhases:</Text>
-        <ListItem
-          name={'{learntPhrases.length} Words and phrases'}
-          onRowPress={() => {
-            alert('You pressed and clicked');
-          }}
-        />
-      </View> */}
-    </View>
+    </SafeAreaView>
   );
 }

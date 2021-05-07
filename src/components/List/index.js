@@ -2,6 +2,7 @@ import React, {useContext, useState} from 'react';
 import {SafeAreaView, FlatList} from 'react-native';
 import {LanguageContext} from '../../context/globalContext';
 import ListItem from '../ListItem';
+import {v4 as uuidv4} from 'uuid';
 
 export default function List({data, onRowPress, navigation, navigateTo}) {
   const {dispatch} = useContext(LanguageContext);
@@ -34,7 +35,7 @@ export default function List({data, onRowPress, navigation, navigateTo}) {
       <FlatList
         data={data}
         renderItem={renderItems}
-        keyExtractor={item => item.id}
+        keyExtractor={item => uuidv4()}
       />
     </SafeAreaView>
   );

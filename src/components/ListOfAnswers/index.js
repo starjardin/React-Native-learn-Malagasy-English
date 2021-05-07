@@ -4,6 +4,7 @@ import {View} from 'react-native';
 import {LanguageContext} from '../../context/globalContext';
 import List from '../List';
 import {shuffle} from '../../utils/shuffle';
+import {randomUniqueNum} from '../../utils/randomNumber';
 import PhraseTextarea from '../PhraseTextarea';
 import Subtitle from '../Subtitle';
 
@@ -11,29 +12,48 @@ export default ({route, navigation}) => {
   const {item} = route.params;
   const {state, dispatch} = useContext(LanguageContext);
   let {phrasesIds} = item;
-  const {phrases, categories} = state;
+  const {phrases} = state;
 
-  const randomPhrasesIdsNumber = Math.floor(Math.random() * phrasesIds.length);
-  const phraseToLearn = phrases.find(
-    el => el.id === phrasesIds[randomPhrasesIdsNumber],
-  );
+  let haveNumber = [];
+  function generateUniqueRandom(maxNumber) {
+    //!Generate random number
+    let random = (Math.random() * maxNumber).toFixed();
+    random = Number(random);
+    if (!haveNumber.includes(random)) {
+      haveNumber.push(random);
+      return random;
+    } else {
+      if (haveNumber.length < maxNumber) {
+        //!Recursively generate number
+        return generateUniqueRandom(maxNumber);
+      } else {
+        return false;
+      }
+    }
+  }
 
-  const randomNumb1 = Math.floor(Math.random() * phrases.length);
-  const randomNumb2 = Math.floor(Math.random() * phrases.length);
-  const randomNumb3 = Math.floor(Math.random() * phrases.length);
+  const uniqueNumber = generateUniqueRandom(phrasesIds.length - 1);
+
+  //!find a phrase from phrases that has the same id to the phraseId in line above
+  const phraseToLearn = phrases.find(el => el.id === phrasesIds[uniqueNumber]);
+
+  const uniqueNumb = randomUniqueNum(phrases.length, phrases.length);
   const randomNumb4 = phrases.indexOf(phraseToLearn);
-  //? Pick an object from the phrases array by their indexes.
-  const obj1 = phrases[randomNumb1];
-  const obj2 = phrases[randomNumb2];
-  const obj3 = phrases[randomNumb3];
-  const obj4 = phrases[randomNumb4];
-  const answers = [obj1, obj2, obj3, obj4];
-  const shuffledAnswers = shuffle(answers);
+
+  //! Pick an object from the phrases array by their indexes.
+  const item1 = phrases[uniqueNumb[1]];
+  const item2 = phrases[uniqueNumb[2]];
+  const item3 = phrases[uniqueNumb[3]];
+  const item4 = phrases[randomNumb4];
+  const itemsToChooseFrom = [item1, item2, item3, item4];
+
+  //!Suffle the items
+  const shuffledAnswers = shuffle(itemsToChooseFrom);
 
   return (
     <View>
       <Subtitle text={`Category : ${item.name.en}`} />
-      <PhraseTextarea phrase={phraseToLearn.name?.mg} />
+      <PhraseTextarea phrase={phraseToLearn?.name.mg} />
       <View>
         <Subtitle text={'Pick a solution:'} />
         <List
@@ -42,6 +62,7 @@ export default ({route, navigation}) => {
           navigation={navigation}
           navigateTo={'LearningScreenValidation'}
           onRowPress={() => {
+            //!pass the shuffledAnswers to be displayed in the LearningValidationScreen
             navigation.navigate('LearningScreenValidation', {shuffledAnswers});
             dispatch({
               type: 'LEARN_PHRASE',

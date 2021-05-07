@@ -8,16 +8,24 @@ import {LanguageContext} from '../context/globalContext';
 import Navbar from '../components/Navbar';
 import {containerStyles} from '../styles/containerStyles';
 import Subtitle from '../components/Subtitle';
+import {ListContext} from '../components/List';
 
 export default ({route, navigation}) => {
   const {state, dispatch} = useContext(LanguageContext);
+  const {setItemSelected} = useContext(ListContext);
   const phrase = state.phraseToLearn;
   const category = state.categoryToLearn;
   const {shuffledAnswers} = route.params;
 
   const ListOfView = (
-    <List data={shuffledAnswers} buttonText={'Pick'} textColor={'#00ffff'} />
+    <List
+      data={shuffledAnswers}
+      disabled={true}
+      buttonText={'Pick'}
+      textColor={'#00ffff'}
+    />
   );
+
   return (
     <View style={containerStyles.container}>
       <Navbar page="HomeScreenValidation" navigation={navigation} />
@@ -30,6 +38,7 @@ export default ({route, navigation}) => {
           buttonText={'Next'}
           onPress={() => {
             navigation.navigate('LearningScreen');
+            setItemSelected('');
             //TODO: //May be I could delete an item here// or put it in the seen phrases
             dispatch({
               type: 'SEEN_ITEM',

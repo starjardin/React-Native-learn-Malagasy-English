@@ -31,7 +31,7 @@ function reducer(state, action) {
     case 'SEEN_ITEM': {
       return {
         ...state,
-        seenPhrases: [...state.seenPhrases, action.payload],
+        seenPhrases: [...state.seenPhrases, {...action.payload, seen: 'true'}],
       };
     }
 

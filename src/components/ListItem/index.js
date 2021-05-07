@@ -54,7 +54,6 @@ export default function ListItem({item, name, disabled, onRowPress}) {
     onPress: () => {
       handlePress(name);
       setItemSelected(item.id);
-      console.log(phraseToLearn);
     },
   };
 

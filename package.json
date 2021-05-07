@@ -27,6 +27,7 @@
     "react-native-screens": "^3.1.1",
     "react-native-svg": "^12.1.1",
     "react-native-svg-transformer": "^0.14.3",
+    "storybook-react-context": "^0.2.5",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

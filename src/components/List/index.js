@@ -13,8 +13,6 @@ export default function List({
 }) {
   const {dispatch} = useContext(LanguageContext);
 
-  //TODO: You still need to do something with the langauge switcher
-
   function handlePress(item) {
     navigation && navigation.navigate(`${navigateTo}`, {item});
     if (onRowPress) {

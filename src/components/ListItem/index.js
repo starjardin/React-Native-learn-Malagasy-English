@@ -11,7 +11,7 @@ import {ListContext} from '../List';
 
 // I choose to render the text and the color from the props, just in case of change in the future
 
-export default function ListItem({item, name, disabled, onRowPress}) {
+export default function ListItem({item, name, onRowPress, disabled}) {
   const {state} = useContext(LanguageContext);
   const {itemSelected, setItemSelected} = useContext(ListContext);
   const {phraseToLearn} = state;
@@ -51,6 +51,7 @@ export default function ListItem({item, name, disabled, onRowPress}) {
 
   const touchProps = {
     style: [listItemStyles.containerStyles],
+    disabled: disabled ? disabled : false,
     onPress: () => {
       handlePress(name);
       setItemSelected(item.id);
@@ -59,9 +60,7 @@ export default function ListItem({item, name, disabled, onRowPress}) {
 
   return (
     <SafeAreaView>
-      <TouchableOpacity {...touchProps} disabled={disabled}>
-        {listItemView}
-      </TouchableOpacity>
+      <TouchableOpacity {...touchProps}>{listItemView}</TouchableOpacity>
     </SafeAreaView>
   );
 }

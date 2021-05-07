@@ -20,9 +20,9 @@ export default ({route, navigation}) => {
   const ListOfView = (
     <List
       data={shuffledAnswers}
-      disabled={true}
       buttonText={'Pick'}
       textColor={'#00ffff'}
+      disabled={true}
     />
   );
 

@@ -4,7 +4,13 @@ import {LanguageContext} from '../../context/globalContext';
 import ListItem from '../ListItem';
 import {v4 as uuidv4} from 'uuid';
 
-export default function List({data, onRowPress, navigation, navigateTo}) {
+export default function List({
+  data,
+  onRowPress,
+  navigation,
+  navigateTo,
+  disabled,
+}) {
   const {dispatch} = useContext(LanguageContext);
 
   //TODO: You still need to do something with the langauge switcher
@@ -23,6 +29,7 @@ export default function List({data, onRowPress, navigation, navigateTo}) {
   const renderItems = ({item}) => {
     return (
       <ListItem
+        disabled={disabled}
         item={item}
         name={item.name.en}
         onRowPress={() => handlePress(item)}

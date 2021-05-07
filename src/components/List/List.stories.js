@@ -4,11 +4,6 @@ import {storiesOf} from '@storybook/react-native';
 import {View} from 'react-native';
 import {LanguageContext} from '../../context/globalContext';
 
-// export default {
-//   title: 'List',
-//   argTypes: {dispatch: () => {}},
-// };
-
 const Parent = () => {
   const {dispatch} = useContext(LanguageContext);
   return <List dispatch={dispatch} />;

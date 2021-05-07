@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 
 import {View, StyleSheet} from 'react-native';
 import ToolButton from '../ToolButton';
@@ -9,6 +9,7 @@ import Add from '../../icons/add.svg';
 import Tick from '../../icons/succes-white.svg';
 import Doubletick from '../../icons/success-double.svg';
 import LanguageSwitcherIcon from '../../icons/lang-switcher';
+import {ListContext} from '../List';
 
 export const styles = StyleSheet.create({
   container: {
@@ -42,6 +43,7 @@ export const Outset = () => {
 };
 
 export default function Navbar({navigation, page}) {
+  const {setItemSelected} = useContext(ListContext);
   return (
     <View>
       {page === 'Home' ? (
@@ -72,6 +74,7 @@ export default function Navbar({navigation, page}) {
             backgroundColor="#06B6D4"
             onPress={() => {
               navigation.navigate('Home');
+              setItemSelected('');
             }}>
             <ChevronLeft />
           </ToolButton>

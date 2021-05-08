@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
 
 // I choose to render the text and the color from the props, just in case of change in the future
 
-export default function ListItemHeadding({actionText, buttonText}) {
+export default function ListItemHeading({actionText, buttonText}) {
   return (
     <SafeAreaView style={styles.containerStyles}>
       <View style={styles.listItemStyles}>
@@ -42,12 +42,12 @@ export default function ListItemHeadding({actionText, buttonText}) {
 }
 
 // Default prop types // just ignore if there is no props
-ListItemHeadding.defaultProps = {
+ListItemHeading.defaultProps = {
   actionText: null,
   buttonText: null,
 };
 
-ListItemHeadding.propTypes = {
+ListItemHeading.propTypes = {
   actionText: PropTypes.string,
   buttonText: PropTypes.string,
 };

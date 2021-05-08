@@ -1,7 +1,7 @@
 import {storiesOf} from '@storybook/react-native';
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import ListItemHeadding from './';
+import ListItemHeading from './';
 
 const styels = StyleSheet.create({
   containerStyles: {
@@ -15,9 +15,9 @@ storiesOf('Section Heading', module)
   ))
   .add('Section Heading', () => (
     <View>
-      <ListItemHeadding actionText="All" buttonText="Learn" />
-      <ListItemHeadding actionText="Will " buttonText="Pick" />
-      <ListItemHeadding actionText="All" buttonText="Learn" />
-      <ListItemHeadding actionText="Not all All" buttonText="Pick" />
+      <ListItemHeading actionText="All" buttonText="Learn" />
+      <ListItemHeading actionText="Will " buttonText="Pick" />
+      <ListItemHeading actionText="All" buttonText="Learn" />
+      <ListItemHeading actionText="Not all All" buttonText="Pick" />
     </View>
   ));

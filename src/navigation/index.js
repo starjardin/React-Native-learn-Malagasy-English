@@ -12,7 +12,7 @@ const CurrentListStack = () => {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
-          headerShown: true,
+          headerShown: false,
         }}>
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="LearningScreen" component={LearningScreen} />
@@ -26,6 +26,3 @@ const CurrentListStack = () => {
 };
 
 export default CurrentListStack;
-
-// yarn add @react-navigation/native
-// yarn add install react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view

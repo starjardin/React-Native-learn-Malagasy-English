@@ -1,21 +1,18 @@
-import React, {useContext, useRef} from 'react';
+import React, {useContext, useState} from 'react';
 import {SafeAreaView, FlatList} from 'react-native';
 import {LanguageContext} from '../../context/globalContext';
 import ListItem from '../ListItem';
+import {v4 as uuidv4} from 'uuid';
 
 export default function List({
-  buttonText,
-  textColor,
   data,
   onRowPress,
   navigation,
   navigateTo,
+  disabled,
 }) {
-  const {dispatch, state} = useContext(LanguageContext);
-  const {answer} = state;
-  const phrase = state.phraseToLearn.mg;
-  const category = state.categoryToLearn;
-  const rowRef = useRef(null);
+  const {dispatch} = useContext(LanguageContext);
+
   //TODO: You still need to do something with the langauge switcher
 
   function handlePress(item) {
@@ -29,22 +26,42 @@ export default function List({
     }
   }
 
+  const renderItems = ({item}) => {
+    return (
+      <ListItem
+        disabled={disabled}
+        item={item}
+        name={item.name.en}
+        onRowPress={() => handlePress(item)}
+      />
+    );
+  };
+
   return (
     <SafeAreaView>
       <FlatList
         data={data}
-        renderItem={({item, index}) => (
-          <ListItem
-            name={item.name.en}
-            rowRef={rowRef}
-            //The buttons inside list items can have text from props.
-            buttonText={buttonText}
-            textColor={textColor}
-            onRowPress={() => handlePress(item)}
-          />
-        )}
-        keyExtractor={item => item.id}
+        renderItem={renderItems}
+        keyExtractor={item => uuidv4()}
       />
     </SafeAreaView>
   );
 }
+
+// The following code is to save id only shared between the list component
+const ListContext = React.createContext();
+
+const ListContextProvider = ({children}) => {
+  const [itemSelected, setItemSelected] = useState('');
+  return (
+    <ListContext.Provider
+      value={{
+        itemSelected,
+        setItemSelected,
+      }}>
+      {children}
+    </ListContext.Provider>
+  );
+};
+
+export {ListContextProvider, ListContext};

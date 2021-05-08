@@ -1,42 +1,20 @@
-import React, {useState, useContext} from 'react';
+import React, {useContext} from 'react';
 import PropTypes from 'prop-types';
-import {SafeAreaView, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {SafeAreaView, View, Text, TouchableOpacity} from 'react-native';
 import Button from '../ActionButton';
 import ArrowRight from '../../icons/arrow-right.svg';
 import Correct from '../../icons/success-green';
+import Incorrect from '../../icons/x-error.svg';
 import {LanguageContext} from '../../context/globalContext';
-
-const styles = StyleSheet.create({
-  containerStyles: {
-    borderBottomWidth: 1,
-    borderStyle: 'solid',
-    borderBottomColor: '#E5E5E5',
-  },
-
-  listItemStyles: {
-    backgroundColor: '#FFFFFF',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingBottom: 17,
-    paddingRight: 20,
-    paddingLeft: 16,
-    paddingTop: 17,
-  },
-  textStyles: {
-    fontStyle: 'normal',
-    fontWeight: 'normal',
-    fontSize: 16,
-    lineHeight: 19,
-    flexBasis: '70%',
-    color: '#111827',
-  },
-});
+import {listItemStyles} from '../../styles/ListemStyles';
+import {ListContext} from '../List';
 
 // I choose to render the text and the color from the props, just in case of change in the future
 
-export default function ListItem({name, onRowPress, textColor, rowRef}) {
+export default function ListItem({item, name, onRowPress, disabled}) {
   const {state} = useContext(LanguageContext);
-  const {phraseToLearn, answer} = state;
+  const {itemSelected, setItemSelected} = useContext(ListContext);
+  const {phraseToLearn} = state;
 
   function handlePress() {
     if (onRowPress) {
@@ -44,38 +22,45 @@ export default function ListItem({name, onRowPress, textColor, rowRef}) {
     }
   }
 
-  let touchProps = {
-    style: [styles.listItemStyles],
+  const buttons =
+    name === phraseToLearn.name?.en && itemSelected ? (
+      <Button buttonText={'correct'} textColor={'#06D440'}>
+        <Correct />
+      </Button>
+    ) : phraseToLearn.name?.en && itemSelected === item.id ? (
+      <Button buttonText={'wrong'} textColor={'#D4068E'}>
+        <Incorrect />
+      </Button>
+    ) : (
+      <Button buttonText={'Pick'} textColor={'#06B6D4'}>
+        <ArrowRight />
+      </Button>
+    );
+
+  const listItemView = (
+    <View style={listItemStyles.itemStyles}>
+      <Text
+        numberOfLines={1}
+        ellipsizeMode="tail"
+        style={[listItemStyles.textStyles]}>
+        {name}
+      </Text>
+      {buttons}
+    </View>
+  );
+
+  const touchProps = {
+    style: [listItemStyles.containerStyles],
+    disabled: disabled ? disabled : false,
+    onPress: () => {
+      handlePress(name);
+      setItemSelected(item.id);
+    },
   };
 
   return (
-    <SafeAreaView style={styles.containerStyles}>
-      <TouchableOpacity
-        {...touchProps}
-        //if onRowPress exists from the parent element then invoke it or else just return null
-        onPress={() => handlePress(name)}>
-        <Text
-          numberOfLines={1}
-          ellipsizeMode="tail"
-          style={[styles.textStyles]}>
-          {name}
-        </Text>
-        {/* {TODO: May be I need to figure something out here} */}
-        <Button
-          buttonText={
-            name.trim().toLowerCase() === phraseToLearn.en.trim().toLowerCase()
-              ? 'correct'
-              : 'Pick'
-          }
-          textColor={
-            name.trim().toLowerCase() === phraseToLearn.en.trim().toLowerCase()
-              ? '#06D440'
-              : '#06B6D4'
-          }
-          onPressButton={onRowPress ? onRowPress : null}>
-          {name === phraseToLearn.en ? <Correct /> : <ArrowRight />}
-        </Button>
-      </TouchableOpacity>
+    <SafeAreaView>
+      <TouchableOpacity {...touchProps}>{listItemView}</TouchableOpacity>
     </SafeAreaView>
   );
 }
@@ -84,11 +69,9 @@ export default function ListItem({name, onRowPress, textColor, rowRef}) {
 ListItem.defaultProps = {
   name: null,
   onRowPress: null,
-  buttonText: null,
 };
 
 ListItem.propTypes = {
   name: PropTypes.string,
   onRowPress: PropTypes.func,
-  buttonText: PropTypes.string,
 };

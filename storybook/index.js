@@ -1,10 +1,10 @@
-import { getStorybookUI, configure } from '@storybook/react-native';
-import { loadStories } from './storyLoader';
+import {getStorybookUI, configure} from '@storybook/react-native';
+import {loadStories} from './storyLoader';
 
 import './rn-addons';
 // import stories
 configure(() => {
-  loadStories()
+  loadStories();
 }, module);
 
 const StorybookUIRoot = getStorybookUI({});

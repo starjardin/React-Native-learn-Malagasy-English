@@ -1,5 +1,8 @@
 # learn-gasy
 
+# About
+
+I built this application along with three other developers. We wanted to explore React Native while creating something useful. In this app, you can learn both English and Malagasy, useful for both foreigners who want to learn Malagasy and Malagasy people who are keen on learning English.
 
 # install
 

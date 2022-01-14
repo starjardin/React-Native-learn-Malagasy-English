@@ -1,4 +1,4 @@
-# learn-gasy
+# Learn English and Malagasy
 
 # About
 

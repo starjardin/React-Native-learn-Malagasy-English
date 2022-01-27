@@ -6,9 +6,9 @@ I built this application along with three other developers. We wanted to explore
 
 # install
 
-    ```bash
-    yarn install
-    ```
+```bash
+yarn install
+```
 
 
 
